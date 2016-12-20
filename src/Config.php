@@ -12,7 +12,7 @@ namespace houdunwang\config;
 //配置项处理
 class Config {
 	//配置集合
-	protected $items = [ ];
+	protected static $items = [ ];
 
 	/**
 	 * 添加配置
@@ -23,7 +23,7 @@ class Config {
 	 * @return bool
 	 */
 	public function set( $key, $name ) {
-		$tmp    = &$this->items;
+		$tmp    = &self::$items;
 		$config = explode( '.', $key );
 		foreach ( (array) $config as $d ) {
 			if ( ! isset( $tmp[ $d ] ) ) {
@@ -45,7 +45,7 @@ class Config {
 	 * @return array|void|null
 	 */
 	public function get( $key ) {
-		$tmp    = $this->items;
+		$tmp    = self::$items;
 		$config = explode( '.', $key );
 		foreach ( (array) $config as $d ) {
 			if ( isset( $tmp[ $d ] ) ) {
@@ -86,7 +86,7 @@ class Config {
 	 * @return bool
 	 */
 	public function has( $key ) {
-		$tmp    = $this->items;
+		$tmp    = self::$items;
 		$config = explode( '.', $key );
 		foreach ( (array) $config as $d ) {
 			if ( isset( $tmp[ $d ] ) ) {
@@ -104,7 +104,7 @@ class Config {
 	 * @return array
 	 */
 	public function all() {
-		return $this->items;
+		return self::$items;
 	}
 
 	/**
@@ -115,6 +115,6 @@ class Config {
 	 * @return mixed
 	 */
 	public function setItems( $items ) {
-		return $this->items = $items;
+		return self::$items = $items;
 	}
 }
