@@ -14,6 +14,15 @@ class Config {
 	//配置集合
 	protected static $items = [ ];
 
+	//批量设置配置项
+	public static function batch( array $config ) {
+		foreach ( $config as $k => $v ) {
+			self::set( $k, $v );
+		}
+
+		return true;
+	}
+
 	/**
 	 * 添加配置
 	 *
