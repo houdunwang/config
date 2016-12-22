@@ -22,7 +22,7 @@ class Config {
 	 *
 	 * @return bool
 	 */
-	public function set( $key, $name ) {
+	public static function set( $key, $name ) {
 		$tmp    = &self::$items;
 		$config = explode( '.', $key );
 		foreach ( (array) $config as $d ) {
@@ -44,7 +44,7 @@ class Config {
 	 *
 	 * @return array|void|null
 	 */
-	public function get( $key ) {
+	public static function get( $key ) {
 		$tmp    = self::$items;
 		$config = explode( '.', $key );
 		foreach ( (array) $config as $d ) {
@@ -66,8 +66,8 @@ class Config {
 	 *
 	 * @return array
 	 */
-	public function getExtName( $key, array $extName ) {
-		$config = $this->get( $key );
+	public static function getExtName( $key, array $extName ) {
+		$config = self::get( $key );
 		$data   = [ ];
 		foreach ( (array) $config as $k => $v ) {
 			if ( ! in_array( $k, $extName ) ) {
@@ -85,7 +85,7 @@ class Config {
 	 *
 	 * @return bool
 	 */
-	public function has( $key ) {
+	public static function has( $key ) {
 		$tmp    = self::$items;
 		$config = explode( '.', $key );
 		foreach ( (array) $config as $d ) {
@@ -103,7 +103,7 @@ class Config {
 	 * 获取所有配置项
 	 * @return array
 	 */
-	public function all() {
+	public static function all() {
 		return self::$items;
 	}
 
@@ -114,7 +114,7 @@ class Config {
 	 *
 	 * @return mixed
 	 */
-	public function setItems( $items ) {
+	public static function setItems( $items ) {
 		return self::$items = $items;
 	}
 }
