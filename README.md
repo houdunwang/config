@@ -50,7 +50,7 @@ composer require houdunwang/config
 
 ####排除批定字段
 ```
-$obj->getExtName('database',['write','read']);
+\houdunwang\config\Config::getExtName('database',['write','read']);
 ```
 
 # c 函数

@@ -9,17 +9,13 @@
  */
 if ( ! function_exists( 'c' ) ) {
 	function c( $name = '', $value = '' ) {
-		static $instance = null;
-		if ( is_null( $instance ) ) {
-			$instance = new \houdunwang\config\Config();
-		}
 		if ( $name === '' ) {
-			return $instance->all();
+			return \houdunwang\config\Config::all();
 		}
 		if ( $value === '' ) {
-			return $instance->get( $name );
+			return \houdunwang\config\Config::get( $name );
 		}
 
-		return $instance->set( $name, $value );
+		return \houdunwang\config\Config::set( $name, $value );
 	}
 }
