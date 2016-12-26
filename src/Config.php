@@ -13,7 +13,7 @@ namespace houdunwang\config;
 use houdunwang\config\build\Base;
 
 class Config {
-	protected $link;
+	protected $link = null;
 
 	//更改缓存驱动
 	protected function driver() {
