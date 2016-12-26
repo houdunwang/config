@@ -10,120 +10,32 @@
 namespace houdunwang\config;
 
 //配置项处理
+use houdunwang\config\build\Base;
+
 class Config {
-	//配置集合
-	protected static $items = [ ];
+	protected static $link;
 
-	//批量设置配置项
-	public static function batch( array $config ) {
-		foreach ( $config as $k => $v ) {
-			self::set( $k, $v );
+	//更改缓存驱动
+	protected function driver() {
+		self::$link = new Base( $this );
+
+		return $this;
+	}
+
+	public function __call( $method, $params ) {
+		if ( is_null( self::$link ) ) {
+			$this->driver();
 		}
 
-		return true;
+		return call_user_func_array( [ self::$link, $method ], $params );
 	}
 
-	/**
-	 * 添加配置
-	 *
-	 * @param $key
-	 * @param $name
-	 *
-	 * @return bool
-	 */
-	public static function set( $key, $name ) {
-		$tmp    = &self::$items;
-		$config = explode( '.', $key );
-		foreach ( (array) $config as $d ) {
-			if ( ! isset( $tmp[ $d ] ) ) {
-				$tmp[ $d ] = [ ];
-			}
-			$tmp = &$tmp[ $d ];
+	public static function __callStatic( $name, $arguments ) {
+		static $link = null;
+		if ( is_null( $link ) ) {
+			$link = new static();
 		}
 
-		$tmp = $name;
-
-		return true;
-	}
-
-	/**
-	 * 获取配置
-	 *
-	 * @param $key
-	 *
-	 * @return array|void|null
-	 */
-	public static function get( $key ) {
-		$tmp    = self::$items;
-		$config = explode( '.', $key );
-		foreach ( (array) $config as $d ) {
-			if ( isset( $tmp[ $d ] ) ) {
-				$tmp = $tmp[ $d ];
-			} else {
-				return null;
-			}
-		}
-
-		return $tmp;
-	}
-
-	/**
-	 * 排队字段获取数据
-	 *
-	 * @param string $key 获取键名
-	 * @param array $extName 排除的字段
-	 *
-	 * @return array
-	 */
-	public static function getExtName( $key, array $extName ) {
-		$config = self::get( $key );
-		$data   = [ ];
-		foreach ( (array) $config as $k => $v ) {
-			if ( ! in_array( $k, $extName ) ) {
-				$data[ $k ] = $v;
-			}
-		}
-
-		return $data;
-	}
-
-	/**
-	 * 检测配置是否存在
-	 *
-	 * @param $key
-	 *
-	 * @return bool
-	 */
-	public static function has( $key ) {
-		$tmp    = self::$items;
-		$config = explode( '.', $key );
-		foreach ( (array) $config as $d ) {
-			if ( isset( $tmp[ $d ] ) ) {
-				$tmp = $tmp[ $d ];
-			} else {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * 获取所有配置项
-	 * @return array
-	 */
-	public static function all() {
-		return self::$items;
-	}
-
-	/**
-	 * 设置items也就是一次更改全部配置
-	 *
-	 * @param $items
-	 *
-	 * @return mixed
-	 */
-	public static function setItems( $items ) {
-		return self::$items = $items;
+		return call_user_func_array( [ $link, $name ], $arguments );
 	}
 }
