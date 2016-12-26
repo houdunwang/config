@@ -13,21 +13,21 @@ namespace houdunwang\config;
 use houdunwang\config\build\Base;
 
 class Config {
-	protected static $link;
+	protected $link;
 
 	//更改缓存驱动
 	protected function driver() {
-		self::$link = new Base( $this );
+		$this->link = new Base( $this );
 
 		return $this;
 	}
 
 	public function __call( $method, $params ) {
-		if ( is_null( self::$link ) ) {
+		if ( is_null( $this->link ) ) {
 			$this->driver();
 		}
 
-		return call_user_func_array( [ self::$link, $method ], $params );
+		return call_user_func_array( [ $this->link, $method ], $params );
 	}
 
 	public static function __callStatic( $name, $arguments ) {
