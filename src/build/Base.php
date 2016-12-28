@@ -24,6 +24,16 @@ class Base {
 	}
 
 	/**
+	 * 加载目录下的所有文件
+	 * @param $dir 目录
+	 */
+	public function loadFiles( $dir ) {
+		foreach ( glob( $dir . '/*' ) as $f ) {
+			$this->set( basename( $f ), include $f );
+		}
+	}
+
+	/**
 	 * 添加配置
 	 *
 	 * @param $key

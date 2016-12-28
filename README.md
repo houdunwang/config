@@ -20,6 +20,12 @@ composer require houdunwang/config
 \houdunwang\config\Config::set('alipay.key.auth','houdunwang');
 ```
 
+####加载所有文件
+```
+//加载config目录下的所有文件到配置容器中
+\houdunwang\config\Config::loadFiles('config');
+```
+
 ####设置多个配置
 ```
 \houdunwang\config\Config::batch(['app.debug'=>true,'database.host'=>'localhost']);
