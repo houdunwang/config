@@ -12,7 +12,7 @@ namespace houdunwang\config\build;
 //配置项处理
 class Base {
 	//配置集合
-	protected $items = [ ];
+	protected static $items = [ ];
 
 	//批量设置配置项
 	public function batch( array $config ) {
@@ -25,11 +25,13 @@ class Base {
 
 	/**
 	 * 加载目录下的所有文件
+	 *
 	 * @param $dir 目录
 	 */
 	public function loadFiles( $dir ) {
 		foreach ( glob( $dir . '/*' ) as $f ) {
-			$this->set( basename( $f ), include $f );
+			$info = pathinfo( $f );
+			$this->set( $info['filename'], include $f );
 		}
 	}
 
@@ -42,7 +44,7 @@ class Base {
 	 * @return bool
 	 */
 	public function set( $key, $name ) {
-		$tmp    = &$this->items;
+		$tmp    = &self::$items;
 		$config = explode( '.', $key );
 		foreach ( (array) $config as $d ) {
 			if ( ! isset( $tmp[ $d ] ) ) {
@@ -64,7 +66,7 @@ class Base {
 	 * @return array|void|null
 	 */
 	public function get( $key ) {
-		$tmp    = $this->items;
+		$tmp    = self::$items;
 		$config = explode( '.', $key );
 		foreach ( (array) $config as $d ) {
 			if ( isset( $tmp[ $d ] ) ) {
@@ -105,7 +107,7 @@ class Base {
 	 * @return bool
 	 */
 	public function has( $key ) {
-		$tmp    = $this->items;
+		$tmp    = self::$items;
 		$config = explode( '.', $key );
 		foreach ( (array) $config as $d ) {
 			if ( isset( $tmp[ $d ] ) ) {
@@ -123,7 +125,7 @@ class Base {
 	 * @return array
 	 */
 	public function all() {
-		return $this->items;
+		return self::$items;
 	}
 
 	/**
@@ -134,6 +136,6 @@ class Base {
 	 * @return mixed
 	 */
 	public function setItems( $items ) {
-		return $this->items = $items;
+		return self::$items = $items;
 	}
 }

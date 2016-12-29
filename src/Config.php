@@ -35,6 +35,8 @@ class Config {
 		if ( is_null( $link ) ) {
 			$link = new static();
 		}
+
+		return $link;
 	}
 
 	public static function __callStatic( $name, $arguments ) {

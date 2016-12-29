@@ -9,9 +9,10 @@
  * '-------------------------------------------------------------------*/
 namespace houdunwang\config;
 
-use hdphp\kernel\ServiceFacade;
 
-class ConfigFacade extends ServiceFacade {
+use houdunwang\framework\build\Facade;
+
+class ConfigFacade extends Facade {
 	public static function getFacadeAccessor() {
 		return 'Config';
 	}

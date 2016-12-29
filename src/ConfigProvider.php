@@ -9,25 +9,12 @@
  * '-------------------------------------------------------------------*/
 namespace houdunwang\config;
 
-use hdphp\kernel\ServiceProvider;
+use houdunwang\framework\build\Provider;
 
-class ConfigProvider extends ServiceProvider {
+class ConfigProvider extends Provider {
 
 	//延迟加载
-	public $defer = true;
-
-	public function boot() {
-		$this->load();
-		date_default_timezone_set( c( 'app.timezone' ) );
-	}
-
-	//加载配置文件
-	protected function load() {
-		foreach ( glob( ROOT_PATH . '/system/config/*' ) as $file ) {
-			$info = pathinfo( $file );
-			c( $info['filename'], require $file );
-		}
-	}
+	public $defer = false;
 
 	public function register() {
 		$this->app->single( 'Config', function ( $app ) {
