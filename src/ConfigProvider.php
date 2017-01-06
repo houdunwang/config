@@ -14,11 +14,14 @@ use houdunwang\framework\build\Provider;
 class ConfigProvider extends Provider {
 
 	//延迟加载
-	public $defer = false;
+	public $defer = true;
+
+	public function boot() {
+	}
 
 	public function register() {
-		$this->app->single( 'Config', function ( $app ) {
-			return new Config( $app );
+		$this->app->single( 'Config', function () {
+			return Config::single();
 		} );
 	}
 }
