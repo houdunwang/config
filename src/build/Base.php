@@ -59,20 +59,19 @@ class Base {
 	}
 
 	/**
-	 * 获取配置
+	 * @param string $key 配置标识
+	 * @param mixed $default 配置不存在时返回的默认值
 	 *
-	 * @param $key
-	 *
-	 * @return array|void|null
+	 * @return array|mixed|null
 	 */
-	public function get( $key ) {
+	public function get( $key, $default = null ) {
 		$tmp    = self::$items;
 		$config = explode( '.', $key );
 		foreach ( (array) $config as $d ) {
 			if ( isset( $tmp[ $d ] ) ) {
 				$tmp = $tmp[ $d ];
 			} else {
-				return null;
+				return $default;
 			}
 		}
 
