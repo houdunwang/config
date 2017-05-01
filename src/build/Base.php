@@ -27,6 +27,17 @@ class Base
     }
 
     /**
+     * 设置.env目录
+     *
+     * @param        $path
+     * @param string $file
+     */
+    public function env($path, $file = '.env')
+    {
+        (new \Dotenv\Dotenv($path, $file))->load();
+    }
+
+    /**
      * 加载目录下的所有文件
      *
      * @param $dir 目录

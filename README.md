@@ -15,6 +15,30 @@ composer require houdunwang/config
 ```
 > HDPHP 框架已经内置此组件，无需要安装
 
+
+####设置配置
+加载.env文件
+```
+#参数为.env文件所在目录
+Config::env(dirname(__DIR__));
+```
+
+一个简单的env内容如下:
+
+```
+DB_DRIVER=mysq22l
+DB_HOST=127.0.0.1
+DB_DATABASE=hdphp
+DB_USER=root
+DB_PASSWORD=
+```
+
+读取env文件内容
+```
+env('DB_HOST','localhost');
+```
+读取.env文件中的 DB_HOST配置，如果为空时使用 localhost
+
 ####设置配置
 ```
 \houdunwang\config\Config::set('alipay.key.auth','houdunwang');
