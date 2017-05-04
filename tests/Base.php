@@ -3,7 +3,6 @@
 namespace tests;
 
 use houdunwang\config\Config;
-use houdunwang\db\Db;
 use PHPUnit\Framework\TestCase;
 
 abstract class Base extends TestCase
