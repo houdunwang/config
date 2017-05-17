@@ -1,7 +1,6 @@
 {
   "name": "houdunwang/config",
   "description": "config组件用于管理网站配置项",
-  "type": "project",
   "keywords": [
     "houdunwang",
     "hdphp",
