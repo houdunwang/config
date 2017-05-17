@@ -32,6 +32,6 @@ if ( ! function_exists('env')) {
      */
     function env($name, $value = null)
     {
-        return getenv($name) ?: $value;
+        return \houdunwang\config\Config::getEnv($name) ?: $value;
     }
 }

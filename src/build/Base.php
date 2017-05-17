@@ -16,6 +16,9 @@ class Base
     //配置集合
     protected static $items = [];
 
+    //.env配置集合
+    protected static $env = [];
+
     //批量设置配置项
     public function batch(array $config)
     {
@@ -29,12 +32,29 @@ class Base
     /**
      * 设置.env目录
      *
-     * @param        $path
      * @param string $file
      */
-    public function env($path, $file = '.env')
+    public function env($file = '.env')
     {
-        (new \Dotenv\Dotenv($path, $file))->load();
+        if (is_file($file)) {
+            $content = file_get_contents($file);
+            preg_match_all('@(.+?)=(.+)@', $content, $env, PREG_SET_ORDER);
+            if ($env) {
+                foreach ($env as $e) {
+                    self::$env[$e[1]] = $e[2];
+                }
+            }
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public static function getEnv($name)
+    {
+        if (isset(self::$env[$name])) {
+            return self::$env[$name];
+        }
     }
 
     /**
