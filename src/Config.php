@@ -13,6 +13,12 @@ namespace houdunwang\config;
 //配置项处理
 use houdunwang\config\build\Base;
 
+/**
+ * 配置
+ * Class Config
+ *
+ * @package houdunwang\config
+ */
 class Config
 {
     protected static $link = null;

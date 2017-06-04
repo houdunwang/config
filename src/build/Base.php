@@ -10,7 +10,12 @@
 
 namespace houdunwang\config\build;
 
-//配置项处理
+/**
+ * 配置项处理
+ * Class Base
+ *
+ * @package houdunwang\config\build
+ */
 class Base
 {
     //配置集合
