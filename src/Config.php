@@ -23,35 +23,22 @@ class Config
 {
     protected static $link = null;
 
-    //更改缓存驱动
-    protected function driver()
-    {
-        self::$link = new Base($this);
-
-        return $this;
-    }
-
     public function __call($method, $params)
     {
-        if (is_null(self::$link)) {
-            $this->driver();
-        }
-
-        return call_user_func_array([self::$link, $method], $params);
+        return call_user_func_array([self::single(), $method], $params);
     }
 
     public static function single()
     {
-        static $link = null;
-        if (is_null($link)) {
-            $link = new static();
+        if (is_null(self::$link)) {
+            self::$link = new Base();
         }
 
-        return $link;
+        return self::$link;
     }
 
     public static function __callStatic($name, $arguments)
     {
-        return call_user_func_array([static::single(), $name], $arguments);
+        return call_user_func_array([self::single(), $name], $arguments);
     }
 }
