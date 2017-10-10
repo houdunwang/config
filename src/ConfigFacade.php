@@ -7,13 +7,15 @@
  * |    WeChat: aihoudun
  * | Copyright (c) 2012-2019, www.houdunwang.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
-namespace houdunwang\config;
 
+namespace houdunwang\config;
 
 use houdunwang\framework\build\Facade;
 
-class ConfigFacade extends Facade {
-	public static function getFacadeAccessor() {
-		return 'Config';
-	}
+class ConfigFacade extends Facade
+{
+    public static function getFacadeAccessor()
+    {
+        return 'Config';
+    }
 }

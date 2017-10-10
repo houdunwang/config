@@ -7,17 +7,17 @@ if ( ! function_exists('c')) {
      *
      * @return mixed
      */
-    function c($name = '', $value = '')
-    {
-        if ($name === '') {
-            return \houdunwang\config\Config::all();
-        }
-        if ($value === '') {
-            return \houdunwang\config\Config::get($name);
-        }
-
-        return \houdunwang\config\Config::set($name, $value);
-    }
+//    function c($name = '', $value = '')
+//    {
+//        if ($name === '') {
+//            return \houdunwang\config\Config::all();
+//        }
+//        if ($value === '') {
+//            return \houdunwang\config\Config::get($name);
+//        }
+//
+//        return \houdunwang\config\Config::set($name, $value);
+//    }
 }
 
 if ( ! function_exists('env')) {

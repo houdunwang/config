@@ -35,9 +35,11 @@ class Base
     }
 
     /**
-     * 设置.env目录
+     * 设置.env文件
      *
      * @param string $file
+     *
+     * @return $this
      */
     public function env($file = '.env')
     {
@@ -50,6 +52,8 @@ class Base
                 }
             }
         }
+
+        return $this;
     }
 
     /**

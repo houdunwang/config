@@ -60,7 +60,7 @@ class ConfigTest extends Base
 
     public function testCfunction()
     {
-        $this->assertInternalType('array', c());
+        $this->assertInternalType('array', Config::get());
         $this->assertEquals(c('database.driver'), 'mysql');
     }
 }
